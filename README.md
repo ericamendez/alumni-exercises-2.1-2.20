@@ -1,6 +1,6 @@
 # 📊 Alumni Exercises: Fullstack Open 2.1 - 2.20
 
-### Goal: Complete the exercises from Fullstack Open Week 0: [https://fullstackopen.com/en/part2](https://fullstackopen.com/en/part2)
+### Goal: Complete the exercises from Fullstack Open Week 2: [https://fullstackopen.com/en/part2](https://fullstackopen.com/en/part2)
 
 ### How to submit your code for review:
 
