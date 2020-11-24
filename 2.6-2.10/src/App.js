@@ -2,12 +2,25 @@ import React, { useState } from 'react'
 
 const App = () => {
   const [ persons, setPersons ] = useState([
-    { name: 'Arto Hellas' }
+    {
+      name: 'Arto Hellas',
+      number: '555-555-5555'
+    }
   ]) 
   const [ newName, setNewName ] = useState('')
+  const [ newNumber, setNewNumber] = useState('')
   
   const handleInput = (e) => {
-    setNewName(e.target.value)
+    switch (e.target.name) {
+      case "name":
+        setNewName(e.target.value)
+        break;
+      case "number":
+        setNewNumber(e.target.value)
+        break;
+      default:
+        break;
+    }
   }
 
   const handleAddPerson = (e) => {
@@ -15,7 +28,11 @@ const App = () => {
     if (Object.keys(persons).some(person => persons[person].name === newName)) {
       alert(`The name ${newName} already exists in the phonebook`)
     } else {
-      setPersons(persons.concat({name: newName}))
+      let newPersonObj = {
+        name: newName,
+        number: newNumber
+      }
+      setPersons(persons.concat(newPersonObj))
     }
   }
 
@@ -24,7 +41,10 @@ const App = () => {
       <h2>Phonebook</h2>
       <form onSubmit={handleAddPerson}>
         <div>
-          name: <input onChange={handleInput} />
+          name: <input name="name" onChange={handleInput} />
+        </div>
+        <div>
+          number: <input name="number" onChange={handleInput} />
         </div>
         <div>
           <button type="submit">add</button>
