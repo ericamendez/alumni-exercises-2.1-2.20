@@ -37,19 +37,31 @@ const App = () => {
   }
 
   const handleAddPerson = (e) => {
-    e.preventDefault()
-    if (Object.keys(persons).some(person => persons[person].name === newName)) {
-      alert(`The name ${newName} already exists in the phonebook`)
-    } else {
-      let newPersonObj = {
-        name: newName,
-        number: newNumber
+    let updateId = ''
+    let newPersonObj = {
+      name: newName,
+      number: newNumber
+    }
+
+    if (Object.keys(persons).some(person => {
+      if (persons[person].name === newName){
+        updateId = persons[person].id
       }
+      return persons[person].name === newName
+    })) {
+      if(window.confirm(`The name ${newName} already exists in the phonebook`)){
+        services
+          .updateContact(updateId, newPersonObj)
+          .then((res) => {
+            console.log(res);
+          })
+      }
+      
+    } else {
 
       services
-        .create(newPersonObj)
+        .createContact(newPersonObj)
         .then(res => {
-          console.log(res)
           setPersons(persons.concat(res.data))
           setNewName('')
           setNewNumber('')
