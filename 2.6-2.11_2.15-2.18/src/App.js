@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
 import PersonForm from './components/PersonForm'
-import axios from 'axios'
 import services from './services'
+import Notification from './components/Notifcation'
 
 const App = () => {
   const [persons, setPersons] = useState({})
@@ -19,6 +19,7 @@ const App = () => {
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber] = useState('')
   const [ newSearch, setNewSearch] = useState('')
+  const [ errorMessage, setErrorMessage ] = useState('')
   
   const handleInput = (e) => {
     switch (e.target.name) {
@@ -66,6 +67,9 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
+        .catch(error => {
+          setErrorMessage(`Error adding contact`)
+        })
     }
   }
 
@@ -78,6 +82,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage}/>
       <Filter handleInput={handleInput} />
       <h2>Add New Person</h2>
       <PersonForm 
